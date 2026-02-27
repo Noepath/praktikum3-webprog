@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0a14;
+  --color-foreground: #f0f0f5;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-hover: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-accent: #c9a96e;
+  --color-accent-hover: #d4b87a;
+  --color-accent-muted: rgba(201, 169, 110, 0.12);
+  --color-danger: #e55050;
+  --color-danger-hover: #cc4040;
+  --color-muted: rgba(255, 255, 255, 0.35);
+  --color-muted-light: rgba(255, 255, 255, 0.55);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   LIQUID GLASS BACKGROUND
+   ======================================== */
+.glass-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(135deg, #0a0a14 0%, #0d1117 40%, #0a0f1a 70%, #0f0a14 100%);
+}
+
+.glass-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+
+.glass-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(100, 120, 200, 0.4), transparent 70%);
+  top: -10%;
+  left: -5%;
+  animation-delay: 0s;
+  animation-duration: 25s;
+}
+
+.glass-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(160, 100, 180, 0.35), transparent 70%);
+  top: 40%;
+  right: -8%;
+  animation-delay: -8s;
+  animation-duration: 22s;
+}
+
+.glass-orb-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(100, 180, 160, 0.3), transparent 70%);
+  bottom: -5%;
+  left: 30%;
+  animation-delay: -14s;
+  animation-duration: 28s;
+}
+
+.glass-orb-4 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.2), transparent 70%);
+  top: 20%;
+  left: 50%;
+  animation-delay: -5s;
+  animation-duration: 30s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+
+/* ========================================
+   GLASS PANEL UTILITIES
+   ======================================== */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 20px rgba(255, 255, 255, 0.02),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.03),
+    0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+}
+
+.glass-input:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: rgba(201, 169, 110, 0.5) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 0 0 3px rgba(201, 169, 110, 0.1),
+    0 0 20px rgba(201, 169, 110, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Glass hover glow */
+.glass-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 30px rgba(255, 255, 255, 0.02),
+    0 8px 40px rgba(0, 0, 0, 0.25),
+    0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Glass button */
+.glass-btn {
+  background: linear-gradient(135deg, rgba(201, 169, 110, 0.9), rgba(180, 145, 85, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    0 4px 16px rgba(201, 169, 110, 0.25);
+  transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+  background: linear-gradient(135deg, rgba(212, 184, 122, 0.95), rgba(201, 169, 110, 0.95));
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 6px 24px rgba(201, 169, 110, 0.35);
+  transform: translateY(-1px);
+}
+
+.glass-btn:active {
+  transform: scale(0.97);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
+.stagger-children > *:nth-child(10) { animation-delay: 0.5s; }
+
+/* Glass shimmer loading */
+.glass-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Focus ring */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: rgba(201, 169, 110, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1), 0 0 20px rgba(201, 169, 110, 0.05);
+}
+
+/* ========================================
+   TWINKLING STARS
+   ======================================== */
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes twinkleBright {
+  0%, 100% { opacity: 0.1; transform: scale(0.6); }
+  40% { opacity: 1; transform: scale(1.2); }
+  60% { opacity: 0.8; transform: scale(1); }
+}
+
+
+.star {
+  position: absolute;
+  width: 1.3px;
+  height: 1.3px;
+  background: white;
+  border-radius: 50%;
+  filter: blur(1.2px);
+  opacity: 0.7;
+  box-shadow: 0 0 7px 2px rgba(255,255,255,0.18), 0 0 16px 5px rgba(120,180,255,0.08);
+  animation: twinkle var(--duration, 6s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.star-bright {
+  width: 2px;
+  height: 2px;
+  filter: blur(1.7px);
+  animation-name: twinkleBright;
+  box-shadow: 0 0 14px 4px rgba(255,255,255,0.32), 0 0 32px 10px rgba(120,180,255,0.13);
+  opacity: 0.88;
+}
